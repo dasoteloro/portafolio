@@ -4,7 +4,6 @@ Estadístico (Universidad Nacional de Colombia) especializado en **analítica de
 Intelligence y medición de experiencia de cliente (CX)**, con automatización de reportes usando IA.
 
 🔗 **Sitio en vivo:** `https://<usuario>.github.io/portafolio/`
-_(reemplaza `<usuario>` por tu usuario de GitHub una vez publicado)_
 
 ## Proyectos
 
