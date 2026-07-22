@@ -3,7 +3,7 @@
 Estadístico (Universidad Nacional de Colombia) especializado en **analítica de datos, Business
 Intelligence y medición de experiencia de cliente (CX)**, con automatización de reportes usando IA.
 
-🔗 **Sitio en vivo:** `https://<usuario>.github.io/portafolio/`
+🔗 **Sitio en vivo:** [Ver portafolio](https://dasoteloro.github.io/portafolio/)
 
 ## Proyectos
 
