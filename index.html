@@ -120,6 +120,40 @@
   .lienzo:hover .flecha, .flecha:focus-visible{opacity:1}
   .flecha:hover{background:rgba(7,11,16,.85)}
   @media (hover:none){.flecha{opacity:.85}}
+  .lienzo img{cursor:zoom-in}
+  .ampliar{position:absolute; top:12px; right:12px; display:inline-flex; align-items:center; gap:7px; padding:7px 12px 7px 10px;
+    border-radius:999px; font-size:12.5px; font-weight:600; background:rgba(7,11,16,.68); color:#fff; border:1px solid rgba(255,255,255,.2);
+    transition:background .2s; backdrop-filter:blur(4px)}
+  .ampliar svg{width:15px; height:15px}
+  .ampliar:hover{background:rgba(7,11,16,.9)}
+
+  /* ============================ VISTA AMPLIADA (zoom) ============================ */
+  .lb{position:fixed; inset:0; z-index:100; background:#04070b; color:#eef2f7; display:flex; flex-direction:column}
+  .lb[hidden]{display:none}
+  .lb-top{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:10px 16px; border-bottom:1px solid rgba(255,255,255,.08); flex:none}
+  .lb-tit{min-width:0; display:flex; align-items:baseline; gap:12px; overflow:hidden; white-space:nowrap}
+  .lb-tit b{font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:18px}
+  .lb-tit span{font-size:13.5px; color:#9aa8bd; overflow:hidden; text-overflow:ellipsis}
+  .lb-ctrl{display:flex; align-items:center; gap:4px; flex:none}
+  .lb-ctrl button{width:38px; height:38px; display:grid; place-items:center; border-radius:9px; color:#eef2f7}
+  .lb-ctrl button:hover{background:rgba(255,255,255,.1)}
+  .lb-ctrl svg{width:19px; height:19px}
+  .lb-pct{font-family:'JetBrains Mono',monospace; font-size:12px; color:#9aa8bd; min-width:52px; text-align:center}
+  .lb-sep{width:1px; height:22px; background:rgba(255,255,255,.14); margin:0 6px}
+  .lb-stage{position:relative; flex:1; min-height:0; display:flex; align-items:center; justify-content:center; overflow:hidden;
+    padding:14px 72px 40px; touch-action:none; cursor:zoom-in; user-select:none; -webkit-user-select:none}
+  .lb-stage.zoom{cursor:grab}
+  .lb-stage.arrastra{cursor:grabbing}
+  .lb-stage img{max-width:100%; max-height:100%; display:block; transform-origin:center center; box-shadow:0 10px 40px rgba(0,0,0,.6); background:#fff}
+  .lb .flecha{opacity:.9; top:calc(50% + 10px)}
+  .lb-pista{position:absolute; left:50%; bottom:10px; transform:translateX(-50%); font-size:12.5px; color:#9aa8bd; white-space:nowrap;
+    background:rgba(4,7,11,.75); padding:4px 12px; border-radius:999px; pointer-events:none; transition:opacity .6s ease}
+  @media (max-width:640px){
+    .lb-stage{padding:8px 6px 36px}
+    .lb .flecha{display:none}
+    .lb-tit span, .lb-pct, .lb-sep, #lb-menos, #lb-mas{display:none}
+    .lb-pista{font-size:11.5px}
+  }
   .pestanas{display:flex; gap:2px; overflow-x:auto; padding:0 6px; scrollbar-width:thin; scrollbar-color:var(--line) transparent}
   .pestana{white-space:nowrap; font-size:14px; color:var(--muted); padding:12px 12px 13px; border-bottom:2px solid transparent; transition:color .2s}
   .pestana:hover{color:var(--ink)}
@@ -249,6 +283,7 @@
           <img id="imagen" alt="">
           <button class="flecha izq" id="ant" type="button" aria-label="Página anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
           <button class="flecha der" id="sig" type="button" aria-label="Página siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="ampliar" id="ampliar" type="button" aria-label="Ampliar a pantalla completa con zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Ampliar</button>
         </div>
         <div class="pestanas" id="pestanas" role="tablist" aria-label="Páginas"></div>
       </figure>
@@ -297,6 +332,25 @@
     <span>© <span id="year"></span> Daniel Sotelo Rodríguez</span>
     <span>Estadístico · Analista de Datos y BI</span>
   </footer>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Vista ampliada">
+  <div class="lb-top">
+    <div class="lb-tit"><b id="lb-caso"></b><span id="lb-pag"></span></div>
+    <div class="lb-ctrl">
+      <button id="lb-menos" type="button" aria-label="Alejar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6"/></svg></button>
+      <span class="lb-pct" id="lb-pct">100 %</span>
+      <button id="lb-mas" type="button" aria-label="Acercar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg></button>
+      <button id="lb-ajustar" type="button" aria-label="Ajustar a la pantalla"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="1.5"/><path d="M9 10h6v4H9z"/></svg></button>
+      <button id="lb-full" type="button" aria-label="Pantalla completa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      <span class="lb-sep"></span>
+      <button id="lb-cerrar" type="button" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="lb-stage" id="lb-stage"><img id="lb-img" alt="" draggable="false"></div>
+  <button class="flecha izq" id="lb-ant" type="button" aria-label="Página anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+  <button class="flecha der" id="lb-sig" type="button" aria-label="Página siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+  <div class="lb-pista" id="lb-pista"></div>
 </div>
 
 <script src="assets/casos.js"></script>
@@ -418,6 +472,126 @@
     var t = TIPOS[+b.dataset.j], r = buscar(t.ej[0], t.ej[1]);
     if (r) { mostrarCaso(r[0], r[1], t.ej[2]); $('visor').scrollIntoView({ behavior: 'smooth' }); }
   });
+
+  // ============ Vista ampliada: pantalla completa, zoom (rueda, doble clic, pellizco, botones) y arrastre ============
+  var lb = $('lb'), st = $('lb-stage'), li = $('lb-img'), z = 1, tx = 0, ty = 0, MAXZ = 4;
+  var tactil = window.matchMedia('(hover: none)').matches;
+  function aplicar(anim) {
+    li.style.transition = anim ? 'transform .22s ease' : 'none';
+    li.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + z + ')';
+    $('lb-pct').textContent = Math.round(z * 100) + ' %';
+    st.classList.toggle('zoom', z > 1.01);
+  }
+  function limitar() {
+    var mx = Math.max(0, (li.offsetWidth * z - st.clientWidth) / 2), my = Math.max(0, (li.offsetHeight * z - st.clientHeight) / 2);
+    tx = Math.min(mx, Math.max(-mx, tx)); ty = Math.min(my, Math.max(-my, ty));
+  }
+  // zoom manteniendo fijo el punto (px, py), medido desde el centro del escenario
+  function zoomEn(nz, px, py, anim) {
+    nz = Math.min(MAXZ, Math.max(1, nz));
+    tx = px - (px - tx) * nz / z; ty = py - (py - ty) * nz / z; z = nz;
+    if (z <= 1.001) { z = 1; tx = 0; ty = 0; }
+    limitar(); aplicar(anim);
+  }
+  function rel(x, y) { var r = st.getBoundingClientRect(); return [x - r.left - r.width / 2, y - r.top - r.height / 2]; }
+  function cargarLb() {
+    var c = casos[actual], v = c.vistas[vista], pg = v.paginas[pagina], yo = pagina;
+    z = 1; tx = 0; ty = 0; aplicar(false);
+    li.src = pg.img; li.alt = c.nombre + ', ' + v.etiqueta + ': ' + pg.nombre;
+    li.style.background = v.tipo === 'tablero' ? 'transparent' : '#fff';
+    $('lb-caso').textContent = c.nombre;
+    $('lb-pag').textContent = v.etiqueta + ' · ' + pg.nombre + ' · ' + (pagina + 1) + ' / ' + v.paginas.length;
+    if (pg.hd) { var h = new Image(); h.onload = function () { if (yo === pagina && !lb.hidden) li.src = pg.hd; }; h.src = pg.hd; }
+  }
+  var pista;
+  function abrirLb() {
+    lb.hidden = false; document.body.style.overflow = 'hidden';
+    cargarLb(); $('lb-cerrar').focus();
+    var p = $('lb-pista'); p.style.opacity = 1;
+    p.textContent = tactil ? 'Pellizca o toca dos veces para acercar · desliza para cambiar de página'
+                           : 'Rueda del mouse o doble clic para acercar · arrastra para moverte · ← → cambian de página';
+    clearTimeout(pista); pista = setTimeout(function () { p.style.opacity = 0; }, 4500);
+  }
+  function cerrarLb() {
+    if (document.fullscreenElement && document.exitFullscreen) { document.exitFullscreen().catch(function () {}); }
+    lb.hidden = true; document.body.style.overflow = ''; $('ampliar').focus({ preventScroll: true });
+  }
+  function navLb(d) { mover(d); cargarLb(); }
+  $('ampliar').addEventListener('click', abrirLb);
+  img.addEventListener('click', abrirLb);
+  $('lb-cerrar').addEventListener('click', cerrarLb);
+  $('lb-ant').addEventListener('click', function () { navLb(-1); });
+  $('lb-sig').addEventListener('click', function () { navLb(1); });
+  $('lb-mas').addEventListener('click', function () { zoomEn(z * 1.5, 0, 0, true); });
+  $('lb-menos').addEventListener('click', function () { zoomEn(z / 1.5, 0, 0, true); });
+  $('lb-ajustar').addEventListener('click', function () { zoomEn(1, 0, 0, true); });
+  if (lb.requestFullscreen) {
+    $('lb-full').addEventListener('click', function () {
+      if (document.fullscreenElement) document.exitFullscreen(); else lb.requestFullscreen().catch(function () {});
+    });
+  } else { $('lb-full').style.display = 'none'; }
+  document.addEventListener('keydown', function (e) {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') { cerrarLb(); }
+    else if (e.key === 'ArrowRight') { navLb(1); }
+    else if (e.key === 'ArrowLeft') { navLb(-1); }
+    else if (e.key === '+' || e.key === '=') { zoomEn(z * 1.5, 0, 0, true); }
+    else if (e.key === '-') { zoomEn(z / 1.5, 0, 0, true); }
+    else if (e.key === '0') { zoomEn(1, 0, 0, true); }
+    else return;
+    e.preventDefault();
+  });
+  st.addEventListener('wheel', function (e) {
+    e.preventDefault(); var p = rel(e.clientX, e.clientY);
+    zoomEn(z * Math.exp(-e.deltaY * 0.0018), p[0], p[1]);
+  }, { passive: false });
+  var pts = {}, arr = null, pinza = null, ultimoToque = 0;
+  function lista() { return Object.keys(pts).map(function (k) { return pts[k]; }); }
+  function dist(a) { return Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y); }
+  st.addEventListener('pointerdown', function (e) {
+    st.setPointerCapture(e.pointerId); pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+    var a = lista();
+    if (a.length === 1) { arr = { x: e.clientX, y: e.clientY, tx: tx, ty: ty, t: Date.now() }; }
+    else if (a.length === 2) {
+      arr = null;
+      pinza = { d: dist(a), z: z, tx: tx, ty: ty, m: rel((a[0].x + a[1].x) / 2, (a[0].y + a[1].y) / 2) };
+    }
+  });
+  st.addEventListener('pointermove', function (e) {
+    if (!pts[e.pointerId]) return;
+    pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+    var a = lista();
+    if (pinza && a.length === 2) {
+      var m = rel((a[0].x + a[1].x) / 2, (a[0].y + a[1].y) / 2);
+      z = pinza.z; tx = pinza.tx; ty = pinza.ty;
+      zoomEn(pinza.z * dist(a) / pinza.d, pinza.m[0], pinza.m[1]);
+      tx += m[0] - pinza.m[0]; ty += m[1] - pinza.m[1]; limitar(); aplicar();
+    } else if (arr && z > 1.01) {
+      st.classList.add('arrastra');
+      tx = arr.tx + (e.clientX - arr.x); ty = arr.ty + (e.clientY - arr.y); limitar(); aplicar();
+    }
+  });
+  function soltar(e) {
+    if (!pts[e.pointerId]) return;
+    delete pts[e.pointerId]; st.classList.remove('arrastra');
+    if (lista().length < 2) pinza = null;
+    if (arr && !lista().length) {
+      var dx = e.clientX - arr.x, dy = e.clientY - arr.y;
+      if (z <= 1.01 && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { navLb(dx < 0 ? 1 : -1); }
+      else if (Math.abs(dx) < 8 && Math.abs(dy) < 8 && Date.now() - arr.t < 350) {   // toque o clic
+        var ahora = Date.now();
+        if (ahora - ultimoToque < 330) {   // doble toque / doble clic: acercar ahí, o volver a ajustar
+          var p = rel(e.clientX, e.clientY);
+          if (z > 1.01) zoomEn(1, 0, 0, true); else zoomEn(2.5, p[0], p[1], true);
+          ultimoToque = 0;
+        } else { ultimoToque = ahora; }
+      }
+      arr = null;
+    }
+  }
+  st.addEventListener('pointerup', soltar);
+  st.addEventListener('pointercancel', soltar);
+  window.addEventListener('resize', function () { if (!lb.hidden) { limitar(); aplicar(); } });
 
   // Enlace directo: #caso/tipo (p. ej. #fiduciatrust/presentacion)
   var h = (location.hash || '').slice(1).split('/'), r = h[0] ? buscar(h[0], h[1]) : null;
