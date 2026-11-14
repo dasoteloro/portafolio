@@ -3,217 +3,221 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Daniel Sotelo · Analítica de datos, BI y experiencia de cliente</title>
-<meta name="description" content="Portafolio de Daniel Sotelo Rodríguez — Estadístico. Convierto encuestas y datos en dashboards, indicadores (NPS/CSAT) y decisiones de negocio, con automatización por IA." />
+<title>Daniel Sotelo · Portafolio de análisis de datos y BI</title>
+<meta name="description" content="Cinco casos con tableros en Power BI y web, informes de resultados y manuales de uso. Se recorren aquí mismo, página por página, sin descargar nada." />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Portafolio de Daniel Sotelo" />
+<meta property="og:site_name" content="Portafolio · Daniel Sotelo" />
 <meta property="og:locale" content="es_CO" />
 <meta property="og:url" content="https://dasoteloro.github.io/portafolio/" />
-<meta property="og:title" content="Daniel Sotelo · Analítica de datos, BI y experiencia de cliente" />
-<meta property="og:description" content="Convierto encuestas y datos en dashboards, indicadores (NPS/CSAT) y decisiones de negocio, con automatización por IA. Dos casos demo con datos 100% ficticios." />
-<meta property="og:image" content="https://dasoteloro.github.io/portafolio/assets/vertice_cover.png" />
-<meta property="og:image:width" content="1920" />
-<meta property="og:image:height" content="1080" />
+<meta property="og:title" content="Daniel Sotelo · Portafolio de análisis de datos y BI" />
+<meta property="og:description" content="Cinco casos —marketing, finanzas, turismo, retail y ventas B2B— con tableros en Power BI y web, informes de resultados y manuales. Se recorren página por página, sin descargar nada." />
+<meta property="og:image" content="https://dasoteloro.github.io/portafolio/assets/pantallas/tandem/2.jpg" />
+<meta property="og:image:width" content="1600" />
+<meta property="og:image:height" content="900" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="canonical" href="https://dasoteloro.github.io/portafolio/" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   /* ============================ TOKENS ============================ */
   :root{
-    /* dark — "instrumento de medición": grafito frío azulado + tríada NPS */
     --bg:#0b1016; --surface:#121824; --panel:#141c2a; --panel-2:#0f151f;
     --line:#243144; --line-soft:#1b2534;
     --ink:#eef2f7; --muted:#9aa8bd; --faint:#6d7c92;
-    --promoter:#4f93de; --neutral:#7d8aa0; --detractor:#e8654f;
     --accent:#4f93de; --accent-ink:#06101d;
     --glow:rgba(79,147,222,.18);
     --shadow:0 20px 60px rgba(0,0,0,.5);
+    --bezel:#070b10;
   }
   :root[data-theme="light"]{
     --bg:#eef1f5; --surface:#ffffff; --panel:#f5f8fc; --panel-2:#eef2f8;
     --line:#dce3ec; --line-soft:#e8edf4;
     --ink:#0f1622; --muted:#53627a; --faint:#7a8aa0;
-    --promoter:#2f6fb2; --neutral:#6b7994; --detractor:#cd4a34;
     --accent:#2f6fb2; --accent-ink:#ffffff;
     --glow:rgba(47,111,178,.14);
     --shadow:0 18px 44px rgba(15,22,34,.10);
+    --bezel:#1a2230;
   }
-
   /* ============================ BASE ============================ */
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    margin:0; background:var(--bg); color:var(--ink);
+  body{margin:0; background:var(--bg); color:var(--ink);
     font-family:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-    line-height:1.6; -webkit-font-smoothing:antialiased;
-    transition:background .35s ease, color .35s ease;
-  }
+    line-height:1.6; -webkit-font-smoothing:antialiased; transition:background .35s ease, color .35s ease}
   a{color:inherit; text-decoration:none}
+  button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
-  .shell{max-width:1080px; margin:0 auto; padding:0 28px}
-
-  /* atmósfera: rejilla técnica muy tenue + halo */
+  .shell{max-width:1180px; margin:0 auto; padding:0 28px}
   .bgfx{position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden}
   .bgfx::before{content:''; position:absolute; inset:0; opacity:.55;
-    background:
-      radial-gradient(70vw 50vh at 88% -8%, var(--glow), transparent 60%),
-      radial-gradient(50vw 40vh at 0% 8%, rgba(232,101,79,.05), transparent 55%);}
+    background:radial-gradient(70vw 50vh at 88% -8%, var(--glow), transparent 60%),
+               radial-gradient(50vw 40vh at 0% 8%, rgba(232,101,79,.05), transparent 55%)}
   .bgfx::after{content:''; position:absolute; inset:0; opacity:.35;
-    background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),
-                     linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
-    background-size:72px 72px; mask-image:radial-gradient(80% 60% at 60% 0%,#000,transparent 75%);}
-
-  /* mono utilitario */
+    background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+    background-size:72px 72px; mask-image:radial-gradient(80% 60% at 60% 0%,#000,transparent 75%)}
   .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
-  .eyebrow{font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em;
-    text-transform:uppercase; color:var(--accent)}
+  .eyebrow{font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent)}
 
   /* ============================ TOPBAR ============================ */
   .top{display:flex; align-items:center; justify-content:space-between; padding:22px 0}
-  .wordmark{font-family:'Instrument Sans',sans-serif; font-weight:600; font-size:16px; letter-spacing:-.01em}
+  .wordmark{font-weight:600; font-size:16px; letter-spacing:-.01em}
   .wordmark b{color:var(--accent)}
   .top-right{display:flex; align-items:center; gap:14px}
-  .top-tag{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em;
-    text-transform:uppercase; color:var(--faint)}
-  .toggle{width:40px; height:40px; display:grid; place-items:center; cursor:pointer;
-    background:var(--surface); border:1px solid var(--line); border-radius:10px; color:var(--ink);
-    transition:border-color .2s, color .2s}
+  .top-tag{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
+  .toggle{width:40px; height:40px; display:grid; place-items:center; background:var(--surface); border:1px solid var(--line);
+    border-radius:10px; color:var(--ink); transition:border-color .2s, color .2s}
   .toggle:hover{border-color:var(--accent); color:var(--accent)}
 
   /* ============================ HERO ============================ */
-  .hero{padding:52px 0 20px; display:grid; grid-template-columns:1.15fr .85fr; gap:52px; align-items:center}
+  .hero{padding:40px 0 30px; display:grid; grid-template-columns:1.2fr .8fr; gap:52px; align-items:end}
   .hero-eyebrow{display:inline-flex; align-items:center; gap:10px; margin-bottom:22px}
-  .hero-eyebrow .dot{width:7px; height:7px; border-radius:50%; background:var(--accent);
-    box-shadow:0 0 0 4px var(--glow)}
+  .hero-eyebrow .dot{width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--glow)}
   .hero h1{font-family:'Fraunces',Georgia,serif; font-optical-sizing:auto; font-weight:500;
-    font-size:clamp(36px,5.4vw,60px); line-height:1.03; letter-spacing:-.02em; margin:0 0 22px}
+    font-size:clamp(36px,5vw,58px); line-height:1.04; letter-spacing:-.02em; margin:0}
   .hero h1 em{font-style:italic; color:var(--accent); font-weight:500}
-  .hero-lead{font-size:clamp(15px,1.5vw,17.5px); color:var(--muted); max-width:520px; margin:0 0 28px}
+  .hero-lead{font-size:clamp(15px,1.5vw,17px); color:var(--muted); margin:0 0 18px}
   .hero-lead b{color:var(--ink); font-weight:600}
-  .hero-meta{display:flex; flex-wrap:wrap; gap:22px; font-family:'JetBrains Mono',monospace;
-    font-size:12.5px; color:var(--faint)}
+  .hero-meta{display:flex; flex-wrap:wrap; gap:20px; font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--faint)}
   .hero-meta a{display:inline-flex; align-items:center; gap:7px; transition:color .2s}
   .hero-meta a:hover{color:var(--accent)}
   .hero-meta svg{width:15px; height:15px}
 
-  /* SIGNATURE — readout de NPS (el lenguaje de la experiencia) */
-  .readout{background:var(--panel); border:1px solid var(--line); border-radius:16px;
-    padding:22px 22px 20px; box-shadow:var(--shadow); position:relative; overflow:hidden}
-  .readout::before{content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent)}
-  .readout-head{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:18px}
-  .readout-label{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em;
-    text-transform:uppercase; color:var(--faint); padding-top:8px}
-  .readout-idx{text-align:right; line-height:1}
-  .readout-idx .n{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:40px;
-    letter-spacing:-.02em; font-variant-numeric:tabular-nums; color:var(--ink)}
-  .readout-idx .u{display:block; font-family:'JetBrains Mono',monospace; font-size:11px;
-    letter-spacing:.18em; color:var(--muted); margin-top:6px}
-  .band-wrap{position:relative; padding-top:22px}
-  .band-callout{position:absolute; top:0; left:3.05%; transform:translateX(-50%);
-    font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
-    color:var(--detractor); white-space:nowrap}
-  .band-callout::after{content:''; position:absolute; left:50%; top:100%; transform:translateX(-50%);
-    width:1px; height:7px; background:var(--detractor); opacity:.55}
-  .band{display:flex; height:34px; border-radius:8px; overflow:hidden; gap:2px; background:transparent}
-  .band__seg{height:100%; width:var(--w); display:flex; align-items:center; justify-content:center;
-    font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; letter-spacing:.01em;
-    color:#fff; white-space:nowrap; overflow:hidden}
-  .seg-d{background:var(--detractor)} .seg-n{background:var(--neutral); color:#0d1420}
-  .seg-p{background:var(--promoter)}
-  .formula{margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:12px;
-    color:var(--muted); letter-spacing:.01em}
-  .formula b{color:var(--ink); font-weight:700}
-  .formula .op{color:var(--faint); margin:0 4px}
-  .legend{display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:12px;
-    font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted)}
-  .legend i{display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:7px; vertical-align:middle}
-  .readout-note{margin-top:16px; padding-top:14px; border-top:1px solid var(--line-soft);
-    font-size:12.5px; color:var(--faint); line-height:1.5}
+  /* ============================ VISOR ============================ */
+  .visor{display:grid; grid-template-columns:280px minmax(0,1fr); gap:24px; align-items:start; scroll-margin-top:16px}
+  .visor > *{min-width:0}
+  .indice{background:var(--panel); border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:var(--shadow)}
+  .indice h2{font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--faint); margin:0; padding:16px 18px 8px}
+  .indice ul{list-style:none; margin:0; padding:0 0 6px}
+  .caso-btn{width:100%; text-align:left; padding:12px 18px 12px 20px; position:relative; display:block; border-top:1px solid var(--line-soft)}
+  .caso-btn b{display:block; font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:19px; letter-spacing:-.01em; line-height:1.2}
+  .caso-btn small{display:block; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--faint); margin-top:4px; letter-spacing:.02em}
+  .caso-btn i{display:block; font-style:normal; font-size:12.5px; color:var(--muted); margin-top:3px}
+  .caso-btn:hover{background:var(--panel-2)}
+  .caso-btn:hover b{color:var(--accent)}
+  .caso-btn[aria-pressed="true"]{background:var(--surface)}
+  .caso-btn[aria-pressed="true"]::before{content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent)}
+  .caso-btn[aria-pressed="true"] small{color:var(--muted)}
 
-  @media (prefers-reduced-motion: no-preference){
-    .band__seg{width:0; transition:width 1.05s cubic-bezier(.2,.75,.25,1)}
-    .band.is-in .band__seg{width:var(--w)}
-  }
+  .pantalla{margin:0; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:10px 10px 0;
+    box-shadow:var(--shadow); position:relative; overflow:hidden}
+  .pantalla::before{content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent)}
+  .vistas{display:flex; flex-wrap:wrap; gap:6px; padding:2px 2px 10px}
+  .vista{font-size:13px; font-weight:600; color:var(--muted); padding:6px 13px; border:1px solid var(--line); border-radius:999px;
+    transition:all .18s ease; display:inline-flex; align-items:center; gap:7px}
+  .vista svg{width:14px; height:14px; flex:none}
+  .vista:hover{color:var(--ink); border-color:var(--accent)}
+  .vista[aria-selected="true"]{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+  .lienzo{position:relative; aspect-ratio:16/9; border-radius:9px; overflow:hidden; background:var(--bezel); border:1px solid var(--line-soft)}
+  .lienzo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:left top; transition:opacity .28s ease}
+  .lienzo.doc img{object-fit:contain; object-position:center}
+  .lienzo img.sale{opacity:0}
+  .flecha{position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:50%; display:grid; place-items:center;
+    background:rgba(7,11,16,.62); color:#fff; border:1px solid rgba(255,255,255,.18); opacity:0; transition:opacity .2s ease, background .2s}
+  .flecha svg{width:18px; height:18px}
+  .flecha.izq{left:12px} .flecha.der{right:12px}
+  .lienzo:hover .flecha, .flecha:focus-visible{opacity:1}
+  .flecha:hover{background:rgba(7,11,16,.85)}
+  @media (hover:none){.flecha{opacity:.85}}
+  .pestanas{display:flex; gap:2px; overflow-x:auto; padding:0 6px; scrollbar-width:thin; scrollbar-color:var(--line) transparent}
+  .pestana{white-space:nowrap; font-size:14px; color:var(--muted); padding:12px 12px 13px; border-bottom:2px solid transparent; transition:color .2s}
+  .pestana:hover{color:var(--ink)}
+  .pestana[aria-selected="true"]{color:var(--ink); font-weight:600; border-bottom-color:var(--accent)}
+  .pagina-n{margin-left:auto; align-self:center; padding:0 6px 0 16px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--faint); white-space:nowrap}
 
-  /* ============================ SPEC SHEET (capacidades) ============================ */
-  .spec{margin:14px 0 8px; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
-  .spec-row{display:grid; grid-template-columns:180px 1fr; gap:18px; padding:16px 2px;
-    border-bottom:1px solid var(--line-soft)}
-  .spec-row:last-child{border-bottom:0}
-  .spec-k{font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.12em;
-    text-transform:uppercase; color:var(--faint); padding-top:2px}
-  .spec-v{font-size:15px; color:var(--ink)}
-  .spec-v small{display:block; color:var(--muted); font-size:13px; margin-top:3px}
-
-  /* ============================ PROYECTOS ============================ */
-  .sec-head{display:flex; align-items:center; gap:16px; margin:56px 0 22px}
-  .sec-head h2{font-family:'Fraunces',Georgia,serif; font-optical-sizing:auto; font-weight:500;
-    font-size:22px; letter-spacing:-.01em; margin:0; color:var(--ink)}
-  .sec-head .rule{flex:1; height:1px; background:var(--line)}
-  .sec-head .count{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--faint)}
-
-  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:24px}
-  .proj{background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden;
-    box-shadow:var(--shadow); display:flex; flex-direction:column; transition:transform .22s ease, border-color .22s ease}
-  .proj:hover{transform:translateY(-5px); border-color:var(--accent)}
-  .proj-thumb{position:relative; aspect-ratio:16/9; overflow:hidden; background:var(--panel);
-    border-bottom:1px solid var(--line)}
-  .proj-thumb img{width:100%; height:100%; object-fit:cover; object-position:top center; display:block}
-  .proj-badge{position:absolute; top:12px; left:12px; font-family:'JetBrains Mono',monospace;
-    font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-    padding:5px 10px; border-radius:6px; background:rgba(8,15,26,.72); color:#fff; backdrop-filter:blur(6px)}
-  .proj-body{padding:20px 22px 22px; display:flex; flex-direction:column; flex:1}
-  .proj-body h3{font-family:'Fraunces',Georgia,serif; font-optical-sizing:auto; font-weight:500;
-    font-size:21px; letter-spacing:-.01em; margin:0 0 9px}
-  .proj-body p{margin:0 0 16px; font-size:14px; color:var(--muted); flex:1}
-  .proj-tags{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px}
-  .proj-tags span{font-family:'JetBrains Mono',monospace; font-size:11px; padding:4px 9px; border-radius:6px;
-    background:var(--panel); border:1px solid var(--line); color:var(--faint)}
-  .proj-actions{display:flex; gap:10px; flex-wrap:wrap}
-  .btn{flex:1; min-width:130px; text-align:center; padding:11px 14px; border-radius:10px;
+  .pie-visor{display:grid; grid-template-columns:minmax(0,1fr) 270px; gap:28px; padding:22px 4px 0; align-items:start}
+  .pregunta-k{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
+  .pregunta{font-family:'Fraunces',Georgia,serif; font-optical-sizing:auto; font-weight:500; font-size:clamp(20px,2vw,25px);
+    line-height:1.25; letter-spacing:-.01em; margin:6px 0 0; max-width:44ch}
+  .resumen{color:var(--muted); font-size:15px; margin:10px 0 0; max-width:62ch}
+  .acciones{display:flex; flex-direction:column; gap:9px}
+  .btn{display:flex; justify-content:space-between; align-items:center; gap:14px; padding:11px 14px; border-radius:10px;
     font-size:14px; font-weight:600; transition:all .18s ease}
+  .btn span{font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; opacity:.75; white-space:nowrap}
   .btn-solid{background:var(--accent); color:var(--accent-ink)}
   .btn-solid:hover{filter:brightness(1.08)}
   .btn-line{background:transparent; border:1px solid var(--line); color:var(--ink)}
   .btn-line:hover{border-color:var(--accent); color:var(--accent)}
 
-  .proj.soon{opacity:.62}
-  .proj.soon .proj-thumb{display:flex; align-items:center; justify-content:center; aspect-ratio:16/9}
-  .proj.soon .plus{font-family:'Fraunces',serif; font-size:38px; color:var(--faint)}
-  .btn-mute{background:transparent; border:1px dashed var(--line); color:var(--faint); pointer-events:none}
+  /* ============================ SECCIONES ============================ */
+  .sec-head{display:flex; align-items:center; gap:16px; margin:72px 0 22px}
+  .sec-head h2{font-family:'Fraunces',Georgia,serif; font-optical-sizing:auto; font-weight:500; font-size:22px; letter-spacing:-.01em; margin:0}
+  .sec-head .rule{flex:1; height:1px; background:var(--line)}
+  .sec-head .count{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--faint)}
+  .intro{color:var(--muted); max-width:66ch; margin:0 0 24px; font-size:15.5px}
 
-  .disclaimer{margin-top:28px; display:flex; gap:12px; align-items:flex-start;
-    font-size:13px; color:var(--faint); background:var(--surface);
-    border:1px solid var(--line); border-radius:12px; padding:15px 18px}
+  .tipos{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px}
+  .tipo{background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:var(--shadow);
+    display:flex; flex-direction:column; text-align:left; transition:transform .22s ease, border-color .22s ease}
+  .tipo:hover{transform:translateY(-4px); border-color:var(--accent)}
+  .tipo .mini{aspect-ratio:16/9; background:var(--bezel); border-bottom:1px solid var(--line); position:relative; overflow:hidden}
+  .tipo .mini img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:left top}
+  .tipo .mini.doc img{object-fit:contain; object-position:center}
+  .tipo div.t{padding:14px 16px 16px}
+  .tipo b{display:flex; justify-content:space-between; align-items:baseline; gap:10px; font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:18px}
+  .tipo b span{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--faint); font-weight:400}
+  .tipo p{margin:6px 0 0; font-size:14px; color:var(--muted)}
+  .tipo small{display:block; margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent)}
+
+  .spec{border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+  .spec-row{display:grid; grid-template-columns:200px 1fr; gap:18px; padding:16px 2px; border-bottom:1px solid var(--line-soft)}
+  .spec-row:last-child{border-bottom:0}
+  .spec-k{font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); padding-top:3px}
+  .spec-k b{color:var(--accent); font-weight:700; margin-right:8px}
+  .spec-v{font-size:15px}
+  .spec-v small{display:block; color:var(--muted); font-size:13.5px; margin-top:3px}
+
+  .contacto{margin-top:72px; background:var(--panel); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow);
+    padding:34px 34px 30px; display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:28px; align-items:center; position:relative; overflow:hidden}
+  .contacto::before{content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent)}
+  .contacto h2{font-family:'Fraunces',Georgia,serif; font-optical-sizing:auto; font-weight:500; font-size:clamp(26px,3vw,36px);
+    line-height:1.1; letter-spacing:-.02em; margin:0}
+  .contacto h2 em{font-style:italic; color:var(--accent)}
+  .contacto p{color:var(--muted); margin:10px 0 0; font-size:15px}
+
+  .disclaimer{margin-top:28px; display:flex; gap:12px; align-items:flex-start; font-size:13px; color:var(--faint);
+    background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:15px 18px}
   .disclaimer svg{flex:none; width:17px; height:17px; margin-top:1px; color:var(--accent)}
-
-  footer{margin:52px 0 44px; padding-top:22px; border-top:1px solid var(--line);
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--faint)}
+  footer{margin:52px 0 44px; padding-top:22px; border-top:1px solid var(--line); display:flex; justify-content:space-between;
+    flex-wrap:wrap; gap:10px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--faint)}
 
   /* ============================ RESPONSIVE ============================ */
-  @media (max-width:860px){
-    .hero{grid-template-columns:1fr; gap:34px; padding-top:36px}
-    .spec-row{grid-template-columns:1fr; gap:5px; padding:14px 2px}
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr; gap:22px; padding-top:28px}
+    .visor{grid-template-columns:1fr}
+    .indice{display:flex; overflow-x:auto; border-radius:12px}
+    .indice h2{display:none}
+    .indice ul{display:contents}
+    .indice li{flex:0 0 auto}
+    .caso-btn{border-top:0; border-right:1px solid var(--line-soft); padding:11px 16px}
+    .caso-btn b{font-size:16px}
+    .caso-btn small{white-space:nowrap}
+    .caso-btn i{display:none}
+    .pie-visor{grid-template-columns:1fr}
+    .tipos{grid-template-columns:1fr 1fr}
+    .contacto{grid-template-columns:1fr}
   }
   @media (max-width:560px){
+    .shell{padding:0 16px}
     .top-tag{display:none}
-    .btn{flex:1 1 100%}
-    .legend{gap:8px 16px}
+    .spec-row{grid-template-columns:1fr; gap:5px; padding:14px 2px}
+    .tipos{grid-template-columns:1fr; gap:14px}
+    .contacto{padding:26px 22px}
+    .pagina-n{display:none}
+    .vista{font-size:12.5px; padding:5px 11px}
   }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important; scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <div class="bgfx"></div>
 <div class="shell">
 
-  <!-- TOPBAR -->
   <header class="top">
     <div class="wordmark">Daniel&nbsp;Sotelo<b>.</b></div>
     <div class="top-right">
-      <span class="top-tag">Analítica · BI · CX</span>
+      <span class="top-tag">Análisis · BI · Experiencia del cliente</span>
       <button class="toggle" id="theme" type="button" aria-label="Cambiar tema claro/oscuro">
         <svg id="ic-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg id="ic-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -221,151 +225,209 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
-    <div class="hero-copy">
-      <span class="hero-eyebrow"><span class="dot"></span><span class="eyebrow">Estadístico · Analítica de datos</span></span>
-      <h1>Mido la experiencia del cliente y la convierto en <em>decisiones</em>.</h1>
-      <p class="hero-lead">
-        Soy <b>Daniel Sotelo Rodríguez</b>. Diseño <b>dashboards a medida</b>, analizo encuestas
-        (<b>NPS · CSAT</b>) y construyo informes ejecutivos — con <b>automatización por IA</b> que
-        lleva la entrega de semanas a días.
-      </p>
+    <div>
+      <span class="hero-eyebrow"><span class="dot"></span><span class="eyebrow">Estadístico · Analista de Datos y BI</span></span>
+      <h1>Del dato crudo a la <em>decisión</em>.</h1>
+    </div>
+    <div>
+      <p class="hero-lead">Cinco casos con <b>tableros</b> en Power BI y web, <b>informes de resultados</b> y <b>manuales de uso</b>. Recórrelos aquí mismo, página por página, sin descargar nada.</p>
       <div class="hero-meta">
-        <a href="mailto:dasoteloro@gmail.com">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-          dasoteloro@gmail.com
-        </a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V9.99H6.02V17h2.32zM7.18 8.9a1.35 1.35 0 1 0 0-2.7 1.35 1.35 0 0 0 0 2.7zM18 17v-3.86c0-2.06-.44-3.65-2.85-3.65-1.16 0-1.94.64-2.26 1.24h-.03V9.99H10.6V17h2.32v-3.47c0-.92.17-1.8 1.3-1.8 1.12 0 1.14 1.05 1.14 1.86V17H18z"/></svg>
-          LinkedIn
-        </a>
+        <a href="https://www.linkedin.com/in/daniel-sotelo-rodriguez" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V9.99H6.02V17h2.32zM7.18 8.9a1.35 1.35 0 1 0 0-2.7 1.35 1.35 0 0 0 0 2.7zM18 17v-3.86c0-2.06-.44-3.65-2.850-3.65-1.16 0-1.94.64-2.26 1.240h-.03V9.99H10.6V17h2.32v-3.47c0-.92.17-1.8 1.3-1.8 1.12 0 1.14 1.05 1.14 1.860V17H18z"/></svg>LinkedIn</a>
+        <a href="mailto:dasoteloro@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>dasoteloro@gmail.com</a>
         <span>Bogotá, CO</span>
       </div>
     </div>
+  </section>
 
-    <!-- SIGNATURE: readout NPS (dato real del caso demo) -->
-    <div class="readout" aria-label="Indicador NPS del caso demo FiduciaTrust: 71.2 por ciento">
-      <div class="readout-head">
-        <span class="readout-label">NPS · Caso demo<br>FiduciaTrust</span>
-        <span class="readout-idx"><span class="n">71,2%</span><span class="u">NET PROMOTER SCORE</span></span>
-      </div>
-      <div class="band-wrap">
-        <span class="band-callout">6,1%</span>
-        <div class="band" id="band" role="img" aria-label="Distribución: 6,1% detractores, 16,6% neutros, 77,3% promotores">
-          <div class="band__seg seg-d" style="--w:6.1%"></div>
-          <div class="band__seg seg-n" style="--w:16.6%">16,6%</div>
-          <div class="band__seg seg-p" style="--w:77.3%">77,3%</div>
+  <section class="visor" id="visor" aria-label="Visor de casos">
+    <nav class="indice" aria-label="Casos"><h2>Casos</h2><ul id="indice"></ul></nav>
+    <div>
+      <figure class="pantalla">
+        <div class="vistas" id="vistas" role="tablist" aria-label="Entregables del caso"></div>
+        <div class="lienzo" id="lienzo">
+          <img id="imagen" alt="">
+          <button class="flecha izq" id="ant" type="button" aria-label="Página anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+          <button class="flecha der" id="sig" type="button" aria-label="Página siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
         </div>
+        <div class="pestanas" id="pestanas" role="tablist" aria-label="Páginas"></div>
+      </figure>
+      <div class="pie-visor">
+        <div>
+          <span class="pregunta-k" id="pregunta-k">Pregunta que responde</span>
+          <p class="pregunta" id="pregunta" aria-live="polite"></p>
+          <p class="resumen" id="resumen"></p>
+        </div>
+        <div class="acciones" id="acciones"></div>
       </div>
-      <div class="formula">
-        <b>77,3%</b> promotores <span class="op">−</span> <b>6,1%</b> detractores <span class="op">=</span> <b>71,2%</b>
-      </div>
-      <div class="legend">
-        <span><i style="background:var(--detractor)"></i>Detractores</span>
-        <span><i style="background:var(--neutral)"></i>Neutros</span>
-        <span><i style="background:var(--promoter)"></i>Promotores</span>
-      </div>
-      <p class="readout-note">Así se calcula el NPS: promotores menos detractores. Este es el resultado del
-        estudio demo — <b style="color:var(--ink)">datos ficticios</b>, mismo método que uso en proyectos reales.</p>
     </div>
   </section>
 
-  <!-- SPEC SHEET -->
-  <section class="spec" aria-label="Qué hago">
-    <div class="spec-row"><div class="spec-k">Servicios</div>
-      <div class="spec-v">Dashboards a medida · Análisis de encuestas y CX · Informes ejecutivos<small>De la data cruda al tablero y a la recomendación accionable.</small></div></div>
-    <div class="spec-row"><div class="spec-k">Indicadores</div>
-      <div class="spec-v">NPS · CSAT · Voz del cliente · Análisis estadístico e inferencial</div></div>
-    <div class="spec-row"><div class="spec-k">Automatización</div>
-      <div class="spec-v">Pipelines y reportes con IA — entrega de semanas a días</div></div>
-    <div class="spec-row"><div class="spec-k">Herramientas</div>
-      <div class="spec-v mono" style="font-size:13.5px; letter-spacing:.02em">Python · SQL · Power BI · R · SPSS · Excel</div></div>
+  <div class="sec-head" id="entregables"><h2>Qué entrego</h2><span class="rule"></span><span class="count" id="n-tipos"></span></div>
+  <p class="intro">Un tablero responde preguntas; el análisis completo también necesita quien lo cuente y quien lo mantenga. Por eso cada caso llega con lo que el proyecto pide: el tablero, el informe con hallazgos y recomendaciones, y el manual para usarlo.</p>
+  <div class="tipos" id="tipos"></div>
+
+  <div class="sec-head" id="proceso"><h2>Cómo trabajo</h2><span class="rule"></span><span class="count">05 pasos</span></div>
+  <section class="spec" aria-label="Proceso de trabajo">
+    <div class="spec-row"><div class="spec-k"><b>01</b>Datos</div><div class="spec-v">Reviso los datos columna por columna<small>Tipos, vacíos, duplicados y valores mal codificados. Nada llega al análisis sin revisar.</small></div></div>
+    <div class="spec-row"><div class="spec-k"><b>02</b>Preguntas</div><div class="spec-v">Cada página y cada lámina responden una pregunta de negocio<small>Primero se define qué decidir; después, qué calcular y qué graficar.</small></div></div>
+    <div class="spec-row"><div class="spec-k"><b>03</b>Análisis</div><div class="spec-v">Estadística, modelo de datos y DAX<small>Indicadores como NPS y CSAT, segmentación y comparación entre periodos. Cada cifra se recalcula por fuera, en Python, y tiene que coincidir.</small></div></div>
+    <div class="spec-row"><div class="spec-k"><b>04</b>Comunicación</div><div class="spec-v">Hallazgos que se entienden sin explicación<small>Títulos que dicen la conclusión, la voz del cliente en sus palabras y recomendaciones con prioridad.</small></div></div>
+    <div class="spec-row"><div class="spec-k"><b>05</b>Entrega</div><div class="spec-v">Listo para actualizar y para usar sin depender de mí<small>Tablero que se actualiza con datos nuevos, manual de uso y documentación técnica cuando el proyecto la necesita.</small></div></div>
+    <div class="spec-row"><div class="spec-k">Herramientas</div><div class="spec-v mono" style="font-size:13.5px; letter-spacing:.02em">Power BI (DAX · Power Query) · Excel · Python · R · SQL · SPSS · HTML/JS · IA generativa</div></div>
   </section>
 
-  <!-- PROYECTOS -->
-  <div class="sec-head">
-    <h2 id="proyectos">Proyectos</h2>
-    <span class="rule"></span>
-    <span class="count">02 / en curso</span>
-  </div>
-
-  <div class="grid">
-    <article class="proj">
-      <div class="proj-thumb">
-        <img src="assets/fiduciatrust_cover.png" alt="Módulo de NPS del dashboard: KPIs y distribución por línea de negocio" loading="lazy" />
-        <span class="proj-badge">Demo · CX</span>
-      </div>
-      <div class="proj-body">
-        <h3>Estudio CX Relacional — FiduciaTrust</h3>
-        <p>Estudio de experiencia de cliente para una fiduciaria (empresa y datos ficticios).
-          Mediante un pipeline en Python calculo NPS, CSAT y voz del cliente, y construyo un dashboard
-          web interactivo autocontenido y un informe ejecutivo de 73 láminas con análisis y recomendaciones.</p>
-        <div class="proj-tags"><span>NPS/CSAT</span><span>Python</span><span>Dashboard HTML</span><span>YoY</span><span>IA</span></div>
-        <div class="proj-actions">
-          <a class="btn btn-solid" href="fiduciatrust/dashboard.html" target="_blank" rel="noopener">Abrir dashboard →</a>
-          <a class="btn btn-line" href="fiduciatrust/informe.pdf" target="_blank" rel="noopener">Informe (PDF)</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="proj">
-      <div class="proj-thumb">
-        <img src="assets/vertice_cover.png" alt="Cadena de valor del dashboard: matriz de importancia contra calificación por atributo" loading="lazy" />
-        <span class="proj-badge">Demo · CX</span>
-      </div>
-      <div class="proj-body">
-        <h3>Estudio CX — Óptica Vértice</h3>
-        <p>Estudio de experiencia de cliente para una cadena de ópticas (empresa y datos ficticios).
-          Además de NPS y voz del cliente, incorpora una <b>cadena de valor</b>: una matriz de importancia
-          contra calificación que ordena por cuál atributo conviene empezar. Dashboard web autocontenido
-          e informe ejecutivo de 103 láminas con hallazgos y plan de acción.</p>
-        <div class="proj-tags"><span>Cadena de valor</span><span>NPS</span><span>Python</span><span>Dashboard HTML</span><span>YoY</span><span>IA</span></div>
-        <div class="proj-actions">
-          <a class="btn btn-solid" href="vertice/dashboard.html" target="_blank" rel="noopener">Abrir dashboard →</a>
-          <a class="btn btn-line" href="vertice/informe.pdf" target="_blank" rel="noopener">Informe (PDF)</a>
-        </div>
-      </div>
-    </article>
-
-    <article class="proj soon">
-      <div class="proj-thumb"><span class="plus">+</span><span class="proj-badge">Próximo</span></div>
-      <div class="proj-body">
-        <h3>Próximo proyecto</h3>
-        <p>Nuevo caso de analítica de datos / BI / CX en preparación.</p>
-        <div class="proj-tags"><span>En construcción</span></div>
-        <div class="proj-actions"><a class="btn btn-mute">Muy pronto</a></div>
-      </div>
-    </article>
-  </div>
+  <section class="contacto" id="contacto">
+    <div>
+      <h2>Datos claros para <em>decidir</em> mejor.</h2>
+      <p>Busco un rol como analista de datos o BI. También desarrollo proyectos por entregable: tableros, informes y presentaciones.</p>
+    </div>
+    <div class="acciones">
+      <a class="btn btn-solid" href="mailto:dasoteloro@gmail.com">Escríbeme<span>dasoteloro@gmail.com</span></a>
+      <a class="btn btn-line" href="https://www.linkedin.com/in/daniel-sotelo-rodriguez" target="_blank" rel="noopener">LinkedIn<span>↗</span></a>
+    </div>
+  </section>
 
   <div class="disclaimer">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-    <span>Los proyectos marcados como <b style="color:var(--ink)">demo</b> usan empresas y datos 100% ficticios,
-      creados solo para mostrar el alcance del trabajo. No contienen información de clientes reales.</span>
+    <span>Las empresas de los casos son <b style="color:var(--ink)">ficticias</b>. Los datos son públicos (reservas de un hotel del Algarve, ventas y pauta digital de práctica) o fueron creados para el portafolio. No contienen información de clientes reales.</span>
   </div>
 
   <footer>
     <span>© <span id="year"></span> Daniel Sotelo Rodríguez</span>
-    <span>Estadístico · BI · Experiencia de cliente</span>
+    <span>Estadístico · Analista de Datos y BI</span>
   </footer>
-
 </div>
 
+<script src="assets/casos.js"></script>
 <script>
-  // Tema con memoria
-  const root=document.documentElement, moon=document.getElementById('ic-moon'), sun=document.getElementById('ic-sun');
-  const saved=localStorage.getItem('portafolio-tema');
-  if(saved) root.setAttribute('data-theme',saved);
-  function syncIcons(){const d=root.getAttribute('data-theme')!=='light'; moon.style.display=d?'block':'none'; sun.style.display=d?'none':'block';}
-  syncIcons();
-  document.getElementById('theme').addEventListener('click',()=>{
-    const next=root.getAttribute('data-theme')==='light'?'dark':'light';
-    root.setAttribute('data-theme',next); localStorage.setItem('portafolio-tema',next); syncIcons();
+(function () {
+  // Tema con memoria (si el navegador bloquea el almacenamiento, funciona igual sin recordar)
+  var root = document.documentElement, moon = document.getElementById('ic-moon'), sun = document.getElementById('ic-sun');
+  try { var guardado = localStorage.getItem('portafolio-tema'); if (guardado) root.setAttribute('data-theme', guardado); } catch (e) {}
+  function iconos() { var d = root.getAttribute('data-theme') !== 'light'; moon.style.display = d ? 'block' : 'none'; sun.style.display = d ? 'none' : 'block'; }
+  iconos();
+  document.getElementById('theme').addEventListener('click', function () {
+    var s = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', s); try { localStorage.setItem('portafolio-tema', s); } catch (e) {} iconos();
   });
-  document.getElementById('year').textContent=new Date().getFullYear();
-  // Animación del readout (respeta reduced-motion vía CSS)
-  requestAnimationFrame(()=>requestAnimationFrame(()=>document.getElementById('band').classList.add('is-in')));
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var casos = window.CASOS, actual = 0, vista = 0, pagina = 0, listo = false;
+  var $ = function (id) { return document.getElementById(id); };
+  var img = $('imagen');
+  var ICON = {
+    tablero: '<path d="M3 3h18v18H3zM3 9h18M9 21V9"/>',
+    presentacion: '<path d="M2 4h20v12H2zM12 16v4M8 20h8"/>',
+    manual: '<path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3zM18 20h2V7M8 9h6M8 13h6"/>',
+    tecnica: '<path d="m8 6-6 6 6 6M16 6l6 6-6 6"/>'
+  };
+  function svg(t) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + ICON[t] + '</svg>'; }
+  var esDoc = function (v) { return v.tipo !== 'tablero'; };
+
+  $('indice').innerHTML = casos.map(function (c, i) {
+    var lista = c.vistas.map(function (v) { return v.etiqueta; }).join(' · ');
+    return '<li><button class="caso-btn" data-i="' + i + '" aria-pressed="false"><b>' + c.nombre + '</b><small>' + c.sector + ' · ' + c.herramienta + '</small><i>' + lista + '</i></button></li>';
+  }).join('');
+
+  function boton(a) {
+    return '<a class="btn ' + (a.solid ? 'btn-solid' : 'btn-line') + '" href="' + a.url + '"' + (a.descarga ? ' download' : ' target="_blank" rel="noopener"') + '>' + a.texto + (a.nota ? '<span>' + a.nota + '</span>' : '') + '</a>';
+  }
+
+  function mostrarPagina(p, foco) {
+    var v = casos[actual].vistas[vista], nueva = v.paginas[p];
+    pagina = p;
+    img.classList.add('sale');
+    var pre = new Image();
+    pre.onload = function () { img.src = nueva.img; img.alt = casos[actual].nombre + ', ' + v.etiqueta + ': ' + nueva.nombre; img.classList.remove('sale'); };
+    pre.src = nueva.img;
+    $('pregunta').textContent = nueva.texto;
+    var n = $('pagina-n'); if (n) { n.textContent = String(p + 1).padStart(2, '0') + ' / ' + String(v.paginas.length).padStart(2, '0'); }
+    var cont = $('pestanas');
+    cont.querySelectorAll('.pestana').forEach(function (t, i) {
+      var sel = i === p;
+      t.setAttribute('aria-selected', sel ? 'true' : 'false'); t.tabIndex = sel ? 0 : -1;
+      if (sel && foco) { t.focus({ preventScroll: true }); }
+      if (sel && (t.offsetLeft < cont.scrollLeft || t.offsetLeft + t.offsetWidth > cont.scrollLeft + cont.clientWidth)) { cont.scrollLeft = t.offsetLeft - 16; }
+    });
+  }
+
+  function mostrarVista(k, p) {
+    var c = casos[actual], v = c.vistas[k];
+    vista = k;
+    $('vistas').querySelectorAll('.vista').forEach(function (b, j) { b.setAttribute('aria-selected', j === k ? 'true' : 'false'); });
+    $('lienzo').classList.toggle('doc', esDoc(v));
+    $('pregunta-k').textContent = v.k;
+    $('pestanas').innerHTML = v.paginas.map(function (pg, j) { return '<button class="pestana" role="tab" data-p="' + j + '">' + pg.nombre + '</button>'; }).join('')
+      + '<span class="pagina-n" id="pagina-n"></span>';
+    $('acciones').innerHTML = v.acciones.map(boton).join('');
+    v.paginas.forEach(function (pg) { new Image().src = pg.img; });
+    var fila = $('pestanas');   // si las pestañas no caben, el contador sobra (y quedaría cortado)
+    if (fila.scrollWidth > fila.clientWidth) { $('pagina-n').style.display = 'none'; }
+    if (listo) { try { history.replaceState(null, '', '#' + c.id + '/' + v.tipo); } catch (e) {} }
+    mostrarPagina(p || 0);
+  }
+
+  function mostrarCaso(i, k, p) {
+    actual = i;
+    var c = casos[i];
+    document.querySelectorAll('.caso-btn').forEach(function (b) { b.setAttribute('aria-pressed', +b.dataset.i === i ? 'true' : 'false'); });
+    $('vistas').innerHTML = c.vistas.map(function (v, j) { return '<button class="vista" role="tab" data-k="' + j + '">' + svg(v.tipo) + v.etiqueta + '</button>'; }).join('');
+    $('resumen').textContent = c.resumen;
+    mostrarVista(k || 0, p);
+  }
+
+  function mover(d) { var n = casos[actual].vistas[vista].paginas.length; mostrarPagina((pagina + d + n) % n); }
+  $('ant').addEventListener('click', function () { mover(-1); });
+  $('sig').addEventListener('click', function () { mover(1); });
+  $('indice').addEventListener('click', function (e) { var b = e.target.closest('.caso-btn'); if (b) mostrarCaso(+b.dataset.i); });
+  $('vistas').addEventListener('click', function (e) { var b = e.target.closest('.vista'); if (b) mostrarVista(+b.dataset.k); });
+  $('pestanas').addEventListener('click', function (e) { var t = e.target.closest('.pestana'); if (t) mostrarPagina(+t.dataset.p); });
+  $('pestanas').addEventListener('keydown', function (e) {
+    var n = casos[actual].vistas[vista].paginas.length;
+    if (e.key === 'ArrowRight') { mostrarPagina((pagina + 1) % n, true); e.preventDefault(); }
+    if (e.key === 'ArrowLeft') { mostrarPagina((pagina - 1 + n) % n, true); e.preventDefault(); }
+  });
+  // deslizar en el celular
+  var x0 = null;
+  $('lienzo').addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  $('lienzo').addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 45) mover(dx < 0 ? 1 : -1); x0 = null; });
+
+  function buscar(id, tipo) {
+    for (var i = 0; i < casos.length; i++) if (casos[i].id === id)
+      for (var k = 0; k < casos[i].vistas.length; k++) if (!tipo || casos[i].vistas[k].tipo === tipo) return [i, k];
+    return null;
+  }
+
+  // Tarjetas "Qué entrego": abren el visor en un ejemplo de cada tipo
+  var TIPOS = [
+    { tipos: ['tablero'], nombre: 'Tableros', desc: 'En Power BI, con modelo estrella y DAX, o en web, un solo archivo que abre en cualquier navegador.', ej: ['mare-serena', 'tablero', 1], img: 'assets/pantallas/mare-serena/2.jpg' },
+    { tipos: ['presentacion'], nombre: 'Informes y presentaciones', desc: 'Hallazgos con su porqué, voz del cliente y recomendaciones priorizadas, listos para presentar a la gerencia.', ej: ['tandem', 'presentacion', 2], img: 'assets/entregables/tandem/presentacion-3.jpg', doc: true },
+    { tipos: ['manual', 'tecnica'], nombre: 'Manuales y documentación', desc: 'Para que el equipo use el tablero sin depender de quien lo hizo, y para que el modelo se pueda mantener.', ej: ['tandem', 'manual', 2], img: 'assets/entregables/tandem/manual-3.jpg', doc: true }
+  ];
+  TIPOS.forEach(function (t) {
+    t.casos = casos.filter(function (c) { return c.vistas.some(function (v) { return t.tipos.indexOf(v.tipo) >= 0; }); }).map(function (c) { return c.nombre; });
+  });
+  $('n-tipos').textContent = String(casos.reduce(function (s, c) { return s + c.vistas.length; }, 0)).padStart(2, '0') + ' entregables';
+  $('tipos').innerHTML = TIPOS.map(function (t, j) {
+    return '<button class="tipo" data-j="' + j + '"><span class="mini' + (t.doc ? ' doc' : '') + '"><img src="' + t.img + '" alt="" loading="lazy"></span>'
+      + '<div class="t"><b>' + t.nombre + '<span>' + String(t.casos.length).padStart(2, '0') + ' casos</span></b><p>' + t.desc + '</p><small>' + t.casos.join(' · ') + '</small></div></button>';
+  }).join('');
+  $('tipos').addEventListener('click', function (e) {
+    var b = e.target.closest('.tipo'); if (!b) return;
+    var t = TIPOS[+b.dataset.j], r = buscar(t.ej[0], t.ej[1]);
+    if (r) { mostrarCaso(r[0], r[1], t.ej[2]); $('visor').scrollIntoView({ behavior: 'smooth' }); }
+  });
+
+  // Enlace directo: #caso/tipo (p. ej. #fiduciatrust/presentacion)
+  var h = (location.hash || '').slice(1).split('/'), r = h[0] ? buscar(h[0], h[1]) : null;
+  if (r) { mostrarCaso(r[0], r[1]); } else { mostrarCaso(0, 0, 1); }
+  listo = true;
+  window.addEventListener('hashchange', function () {
+    var h = location.hash.slice(1).split('/'), r = buscar(h[0], h[1]);
+    if (r) { mostrarCaso(r[0], r[1]); $('visor').scrollIntoView(); }
+  });
+})();
 </script>
 </body>
 </html>
